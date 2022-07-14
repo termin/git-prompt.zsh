@@ -193,7 +193,9 @@ function _zsh_git_prompt_git_status() {
                     } else if (UPSTREAM_TYPE == "full") {
                         print UPSTREAM_PREFIX;
                         print upstream;
-                        print UPSTREAM_SUFFIX;
+                        if (behind < 0 || ahead > 0) {
+                            print UPSTREAM_SUFFIX;
+                        }
                     }
                 }
                 print RC;
@@ -210,7 +212,9 @@ function _zsh_git_prompt_git_status() {
                     print RC;
                 }
 
-                print SEPARATOR;
+                if (unmerged > 0 || staged > 0 || unstaged > 0 || untracked > 0) {
+                    print SEPARATOR;
+                }
 
                 if (unmerged > 0) {
                     print UNMERGED;
